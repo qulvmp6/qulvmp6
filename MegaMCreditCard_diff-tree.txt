@@ -1,0 +1,10 @@
+M src/com/mitake/common/utils/StringUtils.java
+M src/com/mitake/common/xml/creditcard/SelfCreateXmlRes.java
+M src/com/mitake/megam/rest/AuthHandler.java
+M src/com/mitake/megam/rest/BaseHandler.java
+M src/com/mitake/megam/rest/CM010Rest.java
+M src/com/mitake/megam/rest/VR001Rest.java
+M src/com/mitake/megam/rest/VR004Rest.java
+M src/com/mitake/megam/rest/VR012Rest.java
+M src/com/mitake/megam/service/DB21Service.java
+M src/com/mitake/megam/validator/CommonValidator.java

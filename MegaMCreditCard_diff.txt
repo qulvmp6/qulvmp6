@@ -1,0 +1,251 @@
+diff --git a/src/com/mitake/common/utils/StringUtils.java b/src/com/mitake/common/utils/StringUtils.java
+index ccf135f..33e852a 100644
+--- a/src/com/mitake/common/utils/StringUtils.java
++++ b/src/com/mitake/common/utils/StringUtils.java
+@@ -137,6 +137,17 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
+ 		return sb.toString();
+ 	}
+ 
++	/*
++	 * 過濾前後空白(全形空白轉半形空白後trim處理)
++	 */
++	public static String trimBigSpace(String str) {
++		String result = "";
++		if (StringUtils.isNotEmpty(str)) {
++			result = str.replaceAll("　", " ").trim();
++		}
++		return result;
++	}
++
+ 	/**
+ 	 * 取得固定長度的字串
+ 	 * 
+diff --git a/src/com/mitake/common/xml/creditcard/SelfCreateXmlRes.java b/src/com/mitake/common/xml/creditcard/SelfCreateXmlRes.java
+index ebb3ac6..ae92c5f 100644
+--- a/src/com/mitake/common/xml/creditcard/SelfCreateXmlRes.java
++++ b/src/com/mitake/common/xml/creditcard/SelfCreateXmlRes.java
+@@ -335,7 +335,19 @@ public class SelfCreateXmlRes extends SelfDEncryptModule {
+ 			xmlData.setCname("曾大牛");
+ 			xmlData.setEname("seafood");
+ 			xmlData.setMarriage("1");
++			xmlData.setEducation("1");
++			xmlData.setEstGraduateMonth("1");
++			xmlData.setServiceYear("12");
++			xmlData.setCompanyName("test");
++			xmlData.setJobPosition("test");
++			xmlData.setAnnualIncome("123");
+ 			xmlData.setResidentAddrzone("103");
++			xmlData.setOfficeAreaCode1("1234");
++			xmlData.setOfficeTelExt1("1234");
++			xmlData.setOfficeTelNo1("1123");
++			xmlData.setAutoPayAcctBank("123");
++			xmlData.setAutoPayAcctNo("123");
++			xmlData.setAutoPayIndicator("1");
+ 			xmlData.setResidentAddr("信義路400段400巷400號400樓400號");
+ 			xmlData.setBillAddrzone("103");
+ 			xmlData.setBillAddr("信義路555段555巷555號555樓555號");
+diff --git a/src/com/mitake/megam/rest/AuthHandler.java b/src/com/mitake/megam/rest/AuthHandler.java
+index 9c59c57..db40007 100644
+--- a/src/com/mitake/megam/rest/AuthHandler.java
++++ b/src/com/mitake/megam/rest/AuthHandler.java
+@@ -17,6 +17,7 @@ import org.apache.http.impl.client.HttpClients;
+ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+ import org.apache.http.message.BasicNameValuePair;
+ import org.apache.http.util.EntityUtils;
++import org.codehaus.jackson.map.ObjectMapper;
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
+ 
+@@ -95,6 +96,7 @@ public class AuthHandler extends BaseHandler {
+ 	 * String func: 功能代號 7375(本行信用卡驗證), IV(鎖卡驗證), CV(驗證失敗回報), SV(卡友身份查詢)
+ 	 */
+ 	private String validCreditCardSelf(CreditCardInfo creditCardInfo, String tokenId, String verifySerNo, String func) throws Exception {
++		logger.info("AuthHandler.self.info===>{}, {}, {}", tokenId, verifySerNo, func);
+ 		SelfXmlData rqXmlData = new SelfXmlData();
+ 		SelfXmlData rsXmlData = new SelfXmlData();
+ 		SelfCreateXmlReq createXmlReq = new SelfCreateXmlReq();
+@@ -105,7 +107,7 @@ public class AuthHandler extends BaseHandler {
+ 		rqXmlData.setExp(creditCardInfo.getDueDate());
+ 		rqXmlData.setCcd(creditCardInfo.getCheckCode());
+ 		rqXmlData.setId(creditCardInfo.getPrimID().toUpperCase());
+-		if ("SV".equals(func) || "IV".equals(func) || "CV".equals(func)) {
++		if (FUNC_QUERY_CARD_FRIEND.equals(func) || FUNC_VALIDATE_IS_LOCKED.equals(func) || FUNC_REPORT_ERROR.equals(func)) {
+ 			rqXmlData.setCno(StringUtils.fixLength(DateUtil.convertAD_DateStr(creditCardInfo.getBirthday()), 16, Boolean.FALSE, "0".charAt(0)));
+ 			rqXmlData.setExp("0000");
+ 			rqXmlData.setCcd("000");
+@@ -117,9 +119,9 @@ public class AuthHandler extends BaseHandler {
+ 		if (developeMod()) {
+ 			logger.info("AuthHandler進入測試用程式");
+ 			//測試用
+-			if ("7375".equals(func)) {
++			if (FUNC_VALIDATE_SELF_CARD.equals(func)) {
+ 				rsXmlStringEncrypt = this.selfTestXml(rqXmlData);
+-			} else if ("SV".equals(func)) {
++			} else if (FUNC_QUERY_CARD_FRIEND.equals(func)) {
+ 				rsXmlStringEncrypt = this.selfTestSVXml(rqXmlData);
+ 			} else {
+ 				rsXmlStringEncrypt = this.selfTestIVXml(rqXmlData);
+@@ -142,7 +144,7 @@ public class AuthHandler extends BaseHandler {
+ 		}
+ 		logger.info("AuthHandler.self===>{}", rsXmlStringEncrypt);
+ 
+-		if ("7375".equals(func)) {
++		if (FUNC_VALIDATE_SELF_CARD.equals(func)) {
+ 			logger.info("本行卡驗證");
+ 			rsXmlData = createXmlRes.decryptXml(rsXmlStringEncrypt);
+ 			if ("0000".equals(rsXmlData.getResult())) {
+@@ -160,13 +162,13 @@ public class AuthHandler extends BaseHandler {
+ 			} else {
+ 				logger.warn("信用卡資訊錯誤 錯誤代碼:{}", rsXmlData.getResult());
+ 			}
+-		} else if ("IV".equals(func)) {
+-			logger.info("他行卡鎖卡驗證 " + func);
++		} else if (FUNC_VALIDATE_IS_LOCKED.equals(func)) {
++			logger.info("信用卡鎖卡驗證 " + func);
+ 			rsXmlData = createXmlRes.decryptIVXml(rsXmlStringEncrypt);
+-		} else if ("CV".equals(func)) {
+-			logger.info("他行卡失敗寫入 " + func);
++		} else if (FUNC_REPORT_ERROR.equals(func)) {
++			logger.info("信用卡驗證失敗回報 " + func);
+ 			rsXmlData = createXmlRes.decryptIVXml(rsXmlStringEncrypt);
+-		} else if ("SV".equals(func)) {
++		} else if (FUNC_QUERY_CARD_FRIEND.equals(func)) {
+ 			logger.info("本行正卡卡友驗證 " + func);
+ 			rsXmlData = createXmlRes.decryptXml(rsXmlStringEncrypt);
+ 			if ("0000".equals(rsXmlData.getResult()) || "0011".equals(rsXmlData.getResult())) {
+@@ -318,7 +320,7 @@ public class AuthHandler extends BaseHandler {
+ 		cprimInfo.put("AUTOPAY_INDICATOR", rsXmlData.getAutoPayIndicator());
+ 		cprimInfo.put("AUTOPAY_ACCT_BANK", rsXmlData.getAutoPayAcctBank());
+ 		cprimInfo.put("AUTOPAY_ACCT_NO", rsXmlData.getAutoPayAcctNo());
+-		db21Service.saveCpriminfo(tokenId, cprimInfo.toString());
++		db21Service.saveCpriminfo(tokenId, new ObjectMapper().writeValueAsString(cprimInfo));
+ 	}
+ 
+ 	private String otherTestXml() throws Exception {
+diff --git a/src/com/mitake/megam/rest/BaseHandler.java b/src/com/mitake/megam/rest/BaseHandler.java
+index a3e2873..60c8248 100644
+--- a/src/com/mitake/megam/rest/BaseHandler.java
++++ b/src/com/mitake/megam/rest/BaseHandler.java
+@@ -18,6 +18,8 @@ import org.apache.commons.codec.binary.Base64;
+ import org.apache.commons.io.IOUtils;
+ import org.codehaus.jackson.JsonParseException;
+ import org.codehaus.jackson.map.JsonMappingException;
++import org.codehaus.jackson.map.ObjectMapper;
++import org.codehaus.jackson.type.TypeReference;
+ 
+ import com.mitake.common.db.exception.DBBaseException;
+ import com.mitake.common.utils.AESUtils;
+@@ -124,6 +126,12 @@ public class BaseHandler {
+ 		return map;
+ 	}
+ 	
++	public Map<String, String> json2Map(String jsonStr) throws JsonParseException, JsonMappingException, IOException {
++		Map<String, String> map = new HashMap<String, String>();
++		map = new ObjectMapper().readValue(jsonStr, new TypeReference<HashMap<String, String>>() {});
++		return map;
++	}
++
+ 	public boolean vaildTxSn(RqCommonHeader header) {
+ 		if (developeMod()) {
+ 			return Boolean.TRUE;
+diff --git a/src/com/mitake/megam/rest/CM010Rest.java b/src/com/mitake/megam/rest/CM010Rest.java
+index 05e7b6e..da11f7b 100644
+--- a/src/com/mitake/megam/rest/CM010Rest.java
++++ b/src/com/mitake/megam/rest/CM010Rest.java
+@@ -246,7 +246,7 @@ public class CM010Rest extends BaseHandler {
+ 		xmlData.setLaw_agree(cm010Rq.getLaw_agree());
+ 		
+ 		if ("1".equals(cm010Rq.getIsOrigin())) { //本行，資料由LOGINSESSION.CPRIMINFO內撈取
+-			Map<String, String> map = this.str2Map(this.ls.getCpriminfo());
++			Map<String, String> map = this.json2Map(this.ls.getCpriminfo());
+ 			if (map.get("CNAME").equals(cm010Rq.getcPrimChName())) {
+ 				xmlData.setcPrimEngName(map.get("ENAME").toUpperCase());
+ 			} else {
+@@ -592,7 +592,7 @@ public class CM010Rest extends BaseHandler {
+ 					comboDesc.append("申請人限以正卡人之本行新臺幣活期性存款帳戶，辦理信用卡帳款自動扣繳，並同意如下：1.如帳戶餘額不足而無法如期支付信用卡帳款時， 貴行有權取消上述付款代理。如因此產生循環利息、違約金及其他費用，均由持卡人負擔。2.應於自動轉帳預定扣款日當日下午15:30前將款項存入指定帳戶。3.申請人於 貴行若同時持有二張(含)以上之信用卡，僅可由同一存款帳號統一扣款，並以申請人最近申辦之代扣存款帳號為準。");
+ 					comboDesc.append("</li>");
+ 				} else {
+-					Map<String, String> map = this.str2Map(this.ls.getCpriminfo());
++					Map<String, String> map = this.json2Map(this.ls.getCpriminfo());
+ 					String bank = map.get("AUTOPAY_ACCT_BANK");
+ 					String account = map.get("AUTOPAY_ACCT_NO");
+ 					String indicator = map.get("AUTOPAY_INDICATOR");
+diff --git a/src/com/mitake/megam/rest/VR001Rest.java b/src/com/mitake/megam/rest/VR001Rest.java
+index 9e23146..064e065 100644
+--- a/src/com/mitake/megam/rest/VR001Rest.java
++++ b/src/com/mitake/megam/rest/VR001Rest.java
+@@ -82,7 +82,7 @@ public class VR001Rest extends AuthHandler {
+ 									if ("0000".equals(rsCode) || "0011".equals(rsCode)) {
+ 										this.ls = db21Service.getLoginSessionDate(this.ls.getTokenid());
+ 										logger.info("VR001 this.ls.getCpriminfo()======>{}", this.ls.getCpriminfo());
+-										Map<String, String> map = this.str2Map(this.ls.getCpriminfo());
++										Map<String, String> map = this.json2Map(this.ls.getCpriminfo());
+ 										primChName = map.get("CNAME");
+ 										cardFlag = map.get("CARDFG");
+ 										billAddr = map.get("BILL_ADDR");
+diff --git a/src/com/mitake/megam/rest/VR004Rest.java b/src/com/mitake/megam/rest/VR004Rest.java
+index 37b3f7f..22746da 100644
+--- a/src/com/mitake/megam/rest/VR004Rest.java
++++ b/src/com/mitake/megam/rest/VR004Rest.java
+@@ -59,7 +59,7 @@ public class VR004Rest extends BaseHandler {
+ 						CheckSmsOtpRes checkSmsOtpRes = smsOtpHelper.checkSmsOtp(SmsOtpHelper.DEFAULT_SOURCE, vr004Rq.getCustID().toUpperCase(), vr004Rq.getBirthday(), vr004Rq.getSeqNo(), vr004Rq.getOtpCode());
+ 						if (checkSmsOtpRes.isSuccess()) {
+ 							logger.info("VR004 this.ls.getCpriminfo()======>{}", this.ls.getCpriminfo());
+-							Map<String, String> map = this.str2Map(this.ls.getCpriminfo());
++							Map<String, String> map = this.json2Map(this.ls.getCpriminfo());
+ 							vr004Rs.setPrimChName(map.get("CNAME"));
+ 							vr004Rs.setCardFlag(map.get("CARDFG"));
+ 							vr004Rs.setBillAddr(StringUtils.maskAllNumbers(map.get("BILL_ADDR")));
+diff --git a/src/com/mitake/megam/rest/VR012Rest.java b/src/com/mitake/megam/rest/VR012Rest.java
+index 7be0063..2c933a0 100644
+--- a/src/com/mitake/megam/rest/VR012Rest.java
++++ b/src/com/mitake/megam/rest/VR012Rest.java
+@@ -20,6 +20,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
+ import org.apache.http.impl.client.HttpClients;
+ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+ import org.apache.http.util.EntityUtils;
++import org.codehaus.jackson.map.ObjectMapper;
+ import org.slf4j.Logger;
+ import org.slf4j.LoggerFactory;
+ 
+@@ -233,7 +234,7 @@ public class VR012Rest extends BaseHandler {
+ 		cprimInfo.put("AUTOPAY_INDICATOR", rsXmlData.getAutoPayIndicator());
+ 		cprimInfo.put("AUTOPAY_ACCT_BANK", rsXmlData.getAutoPayAcctBank());
+ 		cprimInfo.put("AUTOPAY_ACCT_NO", rsXmlData.getAutoPayAcctNo());
+-		db21Service.saveCpriminfo(tokenId, cprimInfo.toString());
++		db21Service.saveCpriminfo(tokenId, new ObjectMapper().writeValueAsString(cprimInfo));
+ 	}
+ 
+ 	private void validLockCard(VR012RqBody vr012Rq, String xmlNo, String func) throws Exception {
+diff --git a/src/com/mitake/megam/service/DB21Service.java b/src/com/mitake/megam/service/DB21Service.java
+index 3763cec..ebb8861 100644
+--- a/src/com/mitake/megam/service/DB21Service.java
++++ b/src/com/mitake/megam/service/DB21Service.java
+@@ -314,7 +314,7 @@ public class DB21Service extends BaseService {
+ 		List<Bank> bankList = bankDao.getBank();
+ 		for (Bank bank : bankList) {
+ 			Map<String, String> map = new HashMap<String, String>();
+-			String bankName = (StringUtils.isNotEmpty(bank.getFullName())) ? bank.getFullName().trim() : "";
++			String bankName = StringUtils.trimBigSpace(bank.getFullName());
+ 			map.put("bankCode", bank.getBankCode());
+ 			map.put("bankName", bankName);
+ 			list.add(map);
+diff --git a/src/com/mitake/megam/validator/CommonValidator.java b/src/com/mitake/megam/validator/CommonValidator.java
+index 7e1c946..c6f9a03 100644
+--- a/src/com/mitake/megam/validator/CommonValidator.java
++++ b/src/com/mitake/megam/validator/CommonValidator.java
+@@ -799,12 +799,12 @@ public class CommonValidator<K, V> {
+ 	/**
+ 	 * 英文名字格式驗證
+ 	 * 
+-	 * 字串中間至少要有一碼空格 英文字母之間可放行的符號為:「/」、「-」、「,」、「'」、「.」
++	 * 字串中間至少要有一碼空格 英文字母之間可放行的符號為:「/」、「-」、「,」、「’」、「.」
+ 	 * 
+ 	 * @param str
+ 	 */
+ 	private boolean valEnglishName(String str) {
+-		return this.valRegex(str, "^[a-zA-Z.,\\-'\\/]+(\\s+[a-zA-Z.,\\-'\\/]+)+$");
++		return this.valRegex(str, "^[a-zA-Z.,\\-’\\/]+( +[a-zA-Z.,\\-’\\/]+)+$");
+ 	}
+ 
+ 	/**

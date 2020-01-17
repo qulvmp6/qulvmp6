@@ -1,0 +1,717 @@
+diff --git a/MegaMCreditCardWeb/css/style_component.css b/MegaMCreditCardWeb/css/style_component.css
+index 5732097..364b2a0 100755
+--- a/MegaMCreditCardWeb/css/style_component.css
++++ b/MegaMCreditCardWeb/css/style_component.css
+@@ -4,7 +4,10 @@ body, html {
+ 	margin: 0;
+ 	padding: 0;
+ }
+-
++button::-moz-focus-inner {
++border: 0;
++}
++button:focus {outline:0;}
+ /*canvas {
+ 	margin: 1em 1em 0 1em;
+ }
+diff --git a/MegaMCreditCardWeb/errorPage.html b/MegaMCreditCardWeb/errorPage.html
+index a2af004..6c54854 100755
+--- a/MegaMCreditCardWeb/errorPage.html
++++ b/MegaMCreditCardWeb/errorPage.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -34,12 +34,12 @@
+     <script type="text/javascript" src="js/plugin/jquery-3.2.1.min.js"></script>
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/errorPage.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/errorPage.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/index.html b/MegaMCreditCardWeb/index.html
+index c41f6e5..8479a12 100755
+--- a/MegaMCreditCardWeb/index.html
++++ b/MegaMCreditCardWeb/index.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -113,19 +113,19 @@
+ 	<script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+ 	<script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+ 	<script type="text/javascript" src="js/plugin/aes.js"></script>
+-	<script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM001Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM003Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/VR001Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/VR011Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/VR012Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/index.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++	<script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM001Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM003Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/VR001Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/VR011Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/VR012Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/index.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/js/page/step2_1.js b/MegaMCreditCardWeb/js/page/step2_1.js
+index 85214c7..bb09709 100755
+--- a/MegaMCreditCardWeb/js/page/step2_1.js
++++ b/MegaMCreditCardWeb/js/page/step2_1.js
+@@ -210,9 +210,9 @@ function updateCM010RqDataObj() {
+ }
+ 
+ function initValidate() {
+-	/** 字串中間至少要有一碼空格 英文字母之間可放行的符號為:「/」、「-」、「,」、「'」、「.」*/
++	/** 字串中間至少要有一碼空格 英文字母之間可放行的符號為:「/」、「-」、「,」、「’」、「.」*/
+ 	$.validator.addMethod('eNameFormat', function(value,element) {
+-		return /^[a-zA-Z.,\-'\/]+(\s+[a-zA-Z.,\-'\/]+)+$/gi.test(value);
++		return /^[a-zA-Z.,\-’\/]+( +[a-zA-Z.,\-’\/]+)+$/gi.test(value);
+ 	},'請輸入正確英文姓名');
+ 
+ 	var checkChNameIsEdited = function(element) {
+diff --git a/MegaMCreditCardWeb/otpVerify.html b/MegaMCreditCardWeb/otpVerify.html
+index 1b8d444..3344a31 100755
+--- a/MegaMCreditCardWeb/otpVerify.html
++++ b/MegaMCreditCardWeb/otpVerify.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -61,15 +61,15 @@
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+ 	<script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/VR003Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/VR004Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/otpVerify.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/VR003Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/VR004Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/otpVerify.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/resultPage.html b/MegaMCreditCardWeb/resultPage.html
+index db82708..d3fce3f 100755
+--- a/MegaMCreditCardWeb/resultPage.html
++++ b/MegaMCreditCardWeb/resultPage.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <link rel="stylesheet" href="css/pdf_viewer.css"></link>
+     <title>Megabank</title>
+ </head>
+@@ -38,13 +38,13 @@
+     <script type="text/javascript" src="js/plugin/pdf.js"></script>
+     <script type="text/javascript" src="js/plugin/pdf.worker.js"></script>
+     <script type="text/javascript" src="js/plugin/pdf_viewer.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/resultPage.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/resultPage.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step1.html b/MegaMCreditCardWeb/step1.html
+index 99c80e3..42a3757 100755
+--- a/MegaMCreditCardWeb/step1.html
++++ b/MegaMCreditCardWeb/step1.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -157,18 +157,18 @@
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+ 	<script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/SC001Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/VR001Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/VR002Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/VR003Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step1.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/SC001Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/VR001Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/VR002Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/VR003Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step1.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step1a.html b/MegaMCreditCardWeb/step1a.html
+index 359bd10..97d2052 100755
+--- a/MegaMCreditCardWeb/step1a.html
++++ b/MegaMCreditCardWeb/step1a.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -109,16 +109,16 @@
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+ 	<script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/SC001Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/VR011Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step1a.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/SC001Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/VR011Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step1a.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step1b.html b/MegaMCreditCardWeb/step1b.html
+index 352138b..74797af 100755
+--- a/MegaMCreditCardWeb/step1b.html
++++ b/MegaMCreditCardWeb/step1b.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -18,15 +18,15 @@
+ 	<script type="text/javascript" src="js/plugin/jquery-3.2.1.min.js"></script>
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/megapix-image.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/imageUploader.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step1b.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/megapix-image.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/imageUploader.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step1b.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step2_1.html b/MegaMCreditCardWeb/step2_1.html
+index b923946..6d3b747 100755
+--- a/MegaMCreditCardWeb/step2_1.html
++++ b/MegaMCreditCardWeb/step2_1.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -133,15 +133,15 @@
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+     <script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM002Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step2_1.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM002Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step2_1.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step2_2.html b/MegaMCreditCardWeb/step2_2.html
+index e355d4c..51c306c 100755
+--- a/MegaMCreditCardWeb/step2_2.html
++++ b/MegaMCreditCardWeb/step2_2.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -180,15 +180,15 @@
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+     <script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM002Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step2_2.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM002Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step2_2.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step2_2a.html b/MegaMCreditCardWeb/step2_2a.html
+index 48ce01f..036585d 100755
+--- a/MegaMCreditCardWeb/step2_2a.html
++++ b/MegaMCreditCardWeb/step2_2a.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -62,14 +62,14 @@
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+     <script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step2_2a.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step2_2a.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step2_3.html b/MegaMCreditCardWeb/step2_3.html
+index c0006bc..4474f8d 100755
+--- a/MegaMCreditCardWeb/step2_3.html
++++ b/MegaMCreditCardWeb/step2_3.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -177,15 +177,15 @@
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+     <script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM002Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step2_3.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM002Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step2_3.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step2_4.html b/MegaMCreditCardWeb/step2_4.html
+index 4766b25..0fc59d5 100755
+--- a/MegaMCreditCardWeb/step2_4.html
++++ b/MegaMCreditCardWeb/step2_4.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -57,14 +57,14 @@
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+     <script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step2_4.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step2_4.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step3_1.html b/MegaMCreditCardWeb/step3_1.html
+index a345b50..3df7d4f 100755
+--- a/MegaMCreditCardWeb/step3_1.html
++++ b/MegaMCreditCardWeb/step3_1.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -206,17 +206,17 @@
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+     <script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM002Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM004Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM005Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step3_1.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM002Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM004Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM005Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step3_1.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step3_2.html b/MegaMCreditCardWeb/step3_2.html
+index ad91bb4..27017f6 100755
+--- a/MegaMCreditCardWeb/step3_2.html
++++ b/MegaMCreditCardWeb/step3_2.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -89,14 +89,14 @@
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+     <script type="text/javascript" src="js/plugin/jquery.validate.min.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step3_2.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step3_2.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/step4.html b/MegaMCreditCardWeb/step4.html
+index afcffc8..279a5c7 100755
+--- a/MegaMCreditCardWeb/step4.html
++++ b/MegaMCreditCardWeb/step4.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
+@@ -113,17 +113,17 @@
+ 	<script type="text/javascript" src="js/plugin/jquery-3.2.1.min.js"></script>
+     <script type="text/javascript" src="js/plugin/jquery.blockUI.js"></script>
+     <script type="text/javascript" src="js/plugin/aes.js"></script>
+-    <script type="text/javascript" src="js/services/ajax.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiService.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM009Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/AESUtil.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/megapix-image.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/imageUploader.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/page/step4.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/common.js?v=20191224"></script>
+-    <script type="text/javascript" src="js/wda.js?v=20191224"></script>
++    <script type="text/javascript" src="js/services/ajax.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiService.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM009Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/services/apiData/CM010Data.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/AESUtil.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/singletonTimer.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/megapix-image.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/imageUploader.js?v=20200117"></script>
++    <script type="text/javascript" src="js/utils/pageNavigationHandler.js?v=20200117"></script>
++    <script type="text/javascript" src="js/page/step4.js?v=20200117"></script>
++    <script type="text/javascript" src="js/common.js?v=20200117"></script>
++    <script type="text/javascript" src="js/wda.js?v=20200117"></script>
+ </body>
+ </html>
+\ No newline at end of file
+diff --git a/MegaMCreditCardWeb/test_iframe.html b/MegaMCreditCardWeb/test_iframe.html
+index 682ff4e..a7d3188 100755
+--- a/MegaMCreditCardWeb/test_iframe.html
++++ b/MegaMCreditCardWeb/test_iframe.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+-    <link rel="stylesheet" href="css/style_component.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_object.css?v=20191224"></link>
+-    <link rel="stylesheet" href="css/style_utilities.css?v=20191224"></link>
++    <link rel="stylesheet" href="css/style_component.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_object.css?v=20200117"></link>
++    <link rel="stylesheet" href="css/style_utilities.css?v=20200117"></link>
+     <title>Megabank</title>
+ </head>
+ <body>
